@@ -1,0 +1,47 @@
+.heading {
+  padding-right: 1rem;
+  /* border-right: 1px dashed white; */
+}
+.task-list-container {
+  display: flex;
+}
+.task-listing-activity {
+  margin: 0 0.2rem;
+  padding: 0.02rem 0.5rem;
+  border-radius: 5px;
+  box-sizing: border-box;
+  cursor: default;
+  transition: 0.2s;
+}
+.task-listing-activity:hover {
+  background-color: #fff3;
+  border-radius: 2px;
+}
+.task-list-inner-grid {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.2rem;
+}
+.loader-sm {
+  r: 5px;
+  cy: 10px;
+  cx: 10px;
+  stroke: #fff;
+  stroke-width: 2px;
+  stroke-dasharray: 20 8;
+  fill: #0000;
+}
+.loader-rotate {
+  animation: rotate 1s linear infinite;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.cursor-pointer {
+  cursor: pointer;
+}

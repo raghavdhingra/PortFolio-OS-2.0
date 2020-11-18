@@ -77,3 +77,13 @@ export const updatePositionActivity = (payload) => async (dispatch) => {
     console.log(err);
   }
 };
+export const updateDimensionActivity = (payload) => async (dispatch) => {
+  try {
+    dispatch({
+      type: actions.UPDATE_ACTIVITY_DIMENSION,
+      payload,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};

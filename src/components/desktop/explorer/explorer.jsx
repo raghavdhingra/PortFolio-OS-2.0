@@ -25,6 +25,9 @@ const Explorer = ({
   const updateZIndex = () => updateZIndexActivity(explorerIndex);
   const closeActivity = () => removeActivity(explorerIndex);
 
+  const updateDimension = (height, width) =>
+    updateDimension({ height, width, activityIndex: explorerIndex });
+
   const dragElement = useCallback(() => {
     let pos1 = 0,
       pos2 = 0,

@@ -7,7 +7,7 @@
 }
 .dialog-overlay {
   background-color: #0004;
-  z-index: 10;
+  z-index: 20;
 }
 .dialog-container {
   position: absolute;
@@ -19,7 +19,7 @@
   margin: 0 auto;
   color: #212121;
   border-radius: 5px;
-  z-index: 11;
+  z-index: 21;
   width: 100%;
   max-width: 500px;
   border: 1px solid #0002;

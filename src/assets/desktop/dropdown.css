@@ -6,6 +6,7 @@
   max-width: 300px;
   display: grid;
   grid-template-rows: auto 1fr;
+  z-index: 10;
 }
 .drop-drop-caret-pointed-container {
   display: flex;
@@ -16,6 +17,7 @@
   transform: translateX(10px);
 }
 .drop-down-inner-container {
+  box-shadow: 0 2px 5px 0 #0002;
   background-color: rgb(255, 255, 255);
   color: #000;
   border-radius: 5px;
@@ -27,7 +29,6 @@
   max-height: 30.4px;
   box-sizing: border-box;
   padding: 0.4rem 1rem;
-  cursor: pointer;
   transition: 0.2s ease;
 }
 .drop-down-items:hover {

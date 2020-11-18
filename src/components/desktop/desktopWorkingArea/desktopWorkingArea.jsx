@@ -14,9 +14,16 @@ const DesktopWorkingArea = ({ activityList }) => {
   return (
     // No Parent component Other than the main div
     <div className="desktop-area-container">
-      {activityList.map((activity, index) => (
-        <Explorer activity={activity} key={`explorer-${index}`} />
-      ))}
+      {activityList.map(
+        (activity, index) =>
+          activity && (
+            <Explorer
+              explorerIndex={index}
+              activity={activity}
+              key={`explorer-${index}`}
+            />
+          )
+      )}
       {desktopIcons.map((icon, index) => (
         <DesktopIcon
           key={`desktop-icon-${index}`}
@@ -31,7 +38,7 @@ const DesktopWorkingArea = ({ activityList }) => {
 };
 
 const mapStateToProps = (state) => ({
-  activityList: state.activityReducers.activityList,
+  activityList: state.activityReducers,
 });
 
 export default connect(mapStateToProps)(DesktopWorkingArea);

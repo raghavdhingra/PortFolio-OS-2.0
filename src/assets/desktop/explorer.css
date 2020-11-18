@@ -4,6 +4,7 @@
   grid-template-rows: auto 1fr auto;
   border-radius: 3px;
   overflow: hidden;
+  box-shadow: 0 0 10px 1px #0002;
 }
 .explorer-header {
   background: linear-gradient(rgb(53, 49, 50), rgb(50, 49, 50));
@@ -11,6 +12,9 @@
   grid-template-columns: 1fr auto;
   gap: 1rem;
   cursor: grab;
+}
+.explorer-header:active {
+  cursor: grabbing;
 }
 .explorer-header-heading {
   margin: 0.2rem 0.5rem;

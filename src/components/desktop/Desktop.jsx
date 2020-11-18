@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { changeBackImage } from "../../actions/desktopActions";
 import Taskbar from "./taskbar/taskbar";
+import PowerOff from "./powerOff/powerOff";
 import LowerDesktop from "./lowerDesktop/lowerDesktop.jsx";
 import Back1 from "../../assets/background/wall-1.svg";
 import Back2 from "../../assets/background/wall-2.svg";
@@ -29,6 +30,7 @@ const Desktop = ({ brightness, background, changeBackImage }) => {
   }, [backgroundArray, changeBackImage]);
   return (
     <>
+      <PowerOff backImage={backgroundArray[background - 1]} />
       <div
         className={`desktop-container ${
           backgroundArray[background - 1].cover ? "image-cover" : ""

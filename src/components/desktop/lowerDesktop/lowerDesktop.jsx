@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { dropDownToggle } from "../../../actions/desktopActions";
+import {
+  dropDownToggle,
+  activityDropDownToggle,
+} from "../../../actions/desktopActions";
 import NavItem from "./navItem";
 import DesktopWorkingArea from "../desktopWorkingArea/desktopWorkingArea";
 import TERMINAL from "../../../assets/icons/terminal.png";
@@ -9,8 +12,18 @@ import SETTING from "../../../assets/icons/setting.svg";
 import CAMERA from "../../../assets/icons/camera.png";
 import "../../../assets/desktop/lowerDesktop.css";
 
-const LowerDesktop = ({ dropDownOpen, dropDownToggle }) => {
-  const closeDropDown = () => (dropDownOpen ? dropDownToggle(false) : null);
+const LowerDesktop = ({
+  activityDropDown,
+  dropDownOpen,
+  dropDownToggle,
+  activityDropDownToggle,
+}) => {
+  const closeDropDown = () => {
+    if (dropDownOpen || activityDropDown) {
+      dropDownToggle(false);
+      activityDropDownToggle(false);
+    }
+  };
 
   const navList = [
     { name: "Terminal", image: TERMINAL, width: "40px", click: () => null },
@@ -48,5 +61,9 @@ const LowerDesktop = ({ dropDownOpen, dropDownToggle }) => {
 
 const mapStateToProps = (state) => ({
   dropDownOpen: state.desktopReducers.dropDownOpen,
+  activityDropDown: state.desktopReducers.activityDropDown,
 });
-export default connect(mapStateToProps, { dropDownToggle })(LowerDesktop);
+export default connect(mapStateToProps, {
+  dropDownToggle,
+  activityDropDownToggle,
+})(LowerDesktop);

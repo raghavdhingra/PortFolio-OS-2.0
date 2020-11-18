@@ -11,6 +11,11 @@ const initialState = {
   isOnline: true,
   networkType: "4g",
   date: new Date(),
+  activityDropDown: false,
+  powerOff: {
+    active: false,
+    timer: 0,
+  },
 };
 
 export default function (state = initialState, action) {
@@ -43,6 +48,14 @@ export default function (state = initialState, action) {
     case actions.DATE_STATUS: {
       let { date } = payload;
       return { ...state, date };
+    }
+    case actions.ACTIVITY_TOGGLE_DROP_DOWN: {
+      let { activityDropDown } = payload;
+      return { ...state, activityDropDown };
+    }
+    case actions.POWER_OFF_STATUS: {
+      let { powerOff } = payload;
+      return { ...state, powerOff };
     }
     default:
       return state;

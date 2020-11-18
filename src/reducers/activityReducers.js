@@ -13,6 +13,8 @@ const initialState = [
     zIndex: 2,
     top: "34px",
     left: "60px",
+    height: "500px",
+    width: "500px",
   },
 ];
 
@@ -47,6 +49,11 @@ export default function (state = initialState, action) {
     case actions.UPDATE_ACTIVITY_POSITION: {
       let { top, left, activityIndex } = payload;
       state[activityIndex] = { ...state[activityIndex], top, left };
+      return [...state];
+    }
+    case actions.UPDATE_ACTIVITY_DIMENSION: {
+      let { height, width, activityIndex } = payload;
+      state[activityIndex] = { ...state[activityIndex], height, width };
       return [...state];
     }
     default:

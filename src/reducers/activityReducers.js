@@ -11,17 +11,8 @@ const initialState = [
     header: "Head 1",
     footer: "",
     zIndex: 2,
-  },
-  {
-    name: "Activity 2",
-    isLoading: true,
-    date: new Date(),
-    isExplorerOpened: false,
-    isMaximise: false,
-    child: null,
-    header: "Head 2",
-    footer: "",
-    zIndex: 2,
+    top: "34px",
+    left: "60px",
   },
 ];
 
@@ -51,6 +42,11 @@ export default function (state = initialState, action) {
     case actions.TOGGLE_ACTIVITY_MAXIMISE: {
       let { activityIndex, isMaximise } = payload;
       state[activityIndex] = { ...state[activityIndex], isMaximise };
+      return [...state];
+    }
+    case actions.UPDATE_ACTIVITY_POSITION: {
+      let { top, left, activityIndex } = payload;
+      state[activityIndex] = { ...state[activityIndex], top, left };
       return [...state];
     }
     default:

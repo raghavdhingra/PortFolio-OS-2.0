@@ -67,3 +67,13 @@ export const toggleActivityLoading = (payload) => async (dispatch) => {
     console.log(err);
   }
 };
+export const updatePositionActivity = (payload) => async (dispatch) => {
+  try {
+    dispatch({
+      type: actions.UPDATE_ACTIVITY_POSITION,
+      payload,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};

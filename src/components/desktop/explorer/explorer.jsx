@@ -4,6 +4,7 @@ import {
   updateZIndexActivity,
   removeActivity,
   toggleActivityMaximise,
+  updatePositionActivity,
 } from "../../../actions/activityActions";
 import "../../../assets/desktop/explorer.css";
 
@@ -13,9 +14,8 @@ const Explorer = ({
   explorerIndex,
   removeActivity,
   toggleActivityMaximise,
+  updatePositionActivity,
 }) => {
-  const [top, setTop] = useState("34px");
-  const [left, setLeft] = useState("60px");
   const [height] = useState("500px");
   const [width] = useState("500px");
 
@@ -61,27 +61,30 @@ const Explorer = ({
       let leftVal = elementLeftOffset - pos1;
 
       // Condition For Keeping Explorer in Window
-      if (topVal < 34) topVal = 34;
-      if (leftVal < 60) leftVal = 60;
+      if (topVal <= 34) topVal = 34;
+      if (leftVal <= 60) leftVal = 60;
 
       let windowHeight = window.innerHeight;
       let windowWidth = window.innerWidth;
 
-      let bottomVal = windowHeight - (elementTopOffset + elementHeight);
-      if (bottomVal < 0) topVal = windowHeight - elementHeight;
+      if (topVal + elementHeight > windowHeight)
+        topVal = windowHeight - elementHeight;
 
-      let rightVal = windowWidth - (elementLeftOffset + elementWidth);
-      if (rightVal < 0) leftVal = windowWidth - elementWidth;
+      if (leftVal + elementWidth > windowWidth)
+        leftVal = windowWidth - elementWidth;
 
-      setTop(topVal + "px");
-      setLeft(leftVal + "px");
+      updatePositionActivity({
+        top: topVal,
+        left: leftVal,
+        activityIndex: explorerIndex,
+      });
     }
     function closeDragElement() {
       // stop moving when mouse button is released:
       document.onmouseup = null;
       document.onmousemove = null;
     }
-  }, []);
+  }, [updatePositionActivity, explorerIndex]);
   const toggleMaximise = () =>
     toggleActivityMaximise({
       activityIndex: explorerIndex,
@@ -95,8 +98,8 @@ const Explorer = ({
     <div
       className="explorer-container"
       style={{
-        top: activity.isMaximise ? "34px" : top,
-        left: activity.isMaximise ? "60px" : left,
+        top: activity.isMaximise ? "34px" : activity.top,
+        left: activity.isMaximise ? "60px" : activity.left,
         height: activity.isMaximise ? "calc(100vh - 35px)" : height,
         width: activity.isMaximise ? "calc(100vw - 62px)" : width,
         zIndex: activity.zIndex,
@@ -149,4 +152,5 @@ export default connect(mapStateToProps, {
   updateZIndexActivity,
   removeActivity,
   toggleActivityMaximise,
+  updatePositionActivity,
 })(Explorer);

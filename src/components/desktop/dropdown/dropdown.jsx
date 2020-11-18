@@ -74,8 +74,11 @@ const DropDown = ({
             {battery.charging ? "Charging" : "Not charging"})
           </div>
           <div className="dropdown-hr"></div>
-          <div className="drop-down-items">Log out</div>
-          <div className="drop-down-items" onClick={togglePowerDialog}>
+          <div className="drop-down-items cursor-pointer">Log out</div>
+          <div
+            className="drop-down-items cursor-pointer"
+            onClick={togglePowerDialog}
+          >
             Power off
           </div>
         </div>

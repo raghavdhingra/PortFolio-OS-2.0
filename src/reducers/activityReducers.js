@@ -1,29 +1,13 @@
 import * as actions from "../actions/types";
 
-const initialState = [
-  {
-    name: "Activity 1",
-    isLoading: true,
-    date: new Date(),
-    isExplorerOpened: false,
-    isMaximise: false,
-    child: null,
-    header: "Head 1",
-    footer: "",
-    zIndex: 2,
-    top: "34px",
-    left: "60px",
-    height: "500px",
-    width: "500px",
-  },
-];
+const initialState = [];
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case actions.CREATE_ACTIVITY: {
       let { activity } = payload;
-      return [...state, ...activity];
+      return [...state, activity];
     }
     case actions.REMOVE_ACTIVITY: {
       let { activityIndex } = payload;

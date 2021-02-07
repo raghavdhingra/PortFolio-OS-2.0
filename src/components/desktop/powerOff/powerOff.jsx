@@ -4,21 +4,18 @@ import "../../../assets/desktop/powerOff.css";
 
 const PowerOff = ({ backImage, powerOff }) => {
   const [isActive, setIsActive] = useState(false);
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     window.close();
-  //   }, 4000);
-  // }, []);
+
   useEffect(() => {
     if (powerOff.active) {
       setTimeout(() => {
         setIsActive(true);
         setTimeout(() => {
-          return powerOff.active ? window.close() : null;
+          window.close();
         }, 4000);
       }, powerOff.timer * 1000);
     }
   }, [powerOff]);
+
   return (
     <div
       className={`power-off-container ${isActive ? "" : "display-none"} ${

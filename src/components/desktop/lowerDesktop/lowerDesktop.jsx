@@ -4,12 +4,10 @@ import {
   dropDownToggle,
   activityDropDownToggle,
 } from "../../../actions/desktopActions";
+import { createActivity } from "../../../actions/createActivityAction";
 import NavItem from "./navItem";
 import DesktopWorkingArea from "../desktopWorkingArea/desktopWorkingArea";
-import TERMINAL from "../../../assets/icons/terminal.png";
-import BROWSER from "../../../assets/icons/browser.svg";
-import SETTING from "../../../assets/icons/setting.svg";
-import CAMERA from "../../../assets/icons/camera.png";
+import { defaultApps } from "../../../actions/defaultApps";
 import "../../../assets/desktop/lowerDesktop.css";
 
 const LowerDesktop = ({
@@ -17,6 +15,7 @@ const LowerDesktop = ({
   dropDownOpen,
   dropDownToggle,
   activityDropDownToggle,
+  createActivity,
 }) => {
   const closeDropDown = () => {
     if (dropDownOpen || activityDropDown) {
@@ -25,23 +24,20 @@ const LowerDesktop = ({
     }
   };
 
-  const navList = [
-    { name: "Terminal", image: TERMINAL, width: "40px", click: () => null },
-    { name: "Browser", image: BROWSER, width: "50px", click: () => null },
-    { name: "Camera", image: CAMERA, width: "40px", click: () => null },
-    { name: "Settings", image: SETTING, width: "50px", click: () => null },
-  ];
   return (
     <div className="lower-desktop-grid" onClick={closeDropDown}>
       <div className="left-navigation-bar">
         <div>
-          {navList.map((nav, index) => (
-            <NavItem key={`nav-list-${index}`} clickTask={nav.click}>
+          {defaultApps.map((app, index) => (
+            <NavItem
+              key={`nav-list-${index}`}
+              clickTask={() => createActivity({ name: app.key })}
+            >
               <img
-                src={nav.image}
+                src={app.image}
                 className="nav-item-image"
-                width={nav.width}
-                alt={nav.name}
+                width={app.width}
+                alt={app.name}
               />
             </NavItem>
           ))}
@@ -65,5 +61,6 @@ const mapStateToProps = (state) => ({
 });
 export default connect(mapStateToProps, {
   dropDownToggle,
+  createActivity,
   activityDropDownToggle,
 })(LowerDesktop);

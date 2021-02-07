@@ -6,6 +6,12 @@
   overflow: hidden;
   box-shadow: 0 0 10px 1px #0002;
 }
+.explorer-heading-name-icon-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: auto 1fr;
+  gap: 0.5rem;
+}
 .explorer-header {
   background: linear-gradient(rgb(53, 49, 50), rgb(50, 49, 50));
   display: grid;
@@ -46,12 +52,15 @@
 .explorer-body {
   background-color: #fff;
   color: #212121;
-  border-top: 1px solid #0003;
-  border-bottom: 1px solid #0003;
+  overflow: hidden;
   box-sizing: border-box;
 }
 .explorer-footer {
+  border-top: 1px solid #0003;
   background-color: rgb(247, 247, 247);
   color: #212121;
   padding: 0.2rem 0.5rem;
+}
+.sc-EHOje.dMFuoo {
+  overflow-x: hidden;
 }

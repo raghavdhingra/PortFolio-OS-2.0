@@ -1,32 +1,32 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import {
   updateZIndexActivity,
   removeActivity,
   toggleActivityMaximise,
   updatePositionActivity,
+  updateDimensionActivity,
 } from "../../../actions/activityActions";
+import fileImage from "../../../assets/icons/file.svg";
 import "../../../assets/desktop/explorer.css";
 
 const Explorer = ({
   activity,
   updateZIndexActivity,
+  updateDimensionActivity,
   explorerIndex,
   removeActivity,
   toggleActivityMaximise,
   updatePositionActivity,
 }) => {
-  const [height] = useState("500px");
-  const [width] = useState("500px");
-
   const explorerRef = useRef(null);
   const elementToDrag = useRef(null);
 
   const updateZIndex = () => updateZIndexActivity(explorerIndex);
   const closeActivity = () => removeActivity(explorerIndex);
 
-  const updateDimension = (height, width) =>
-    updateDimension({ height, width, activityIndex: explorerIndex });
+  // const updateDimension = (height, width) =>
+  //   updateDimensionActivity({ height, width, activityIndex: explorerIndex });
 
   const dragElement = useCallback(() => {
     let pos1 = 0,
@@ -57,15 +57,15 @@ const Explorer = ({
       pos4 = e.clientY;
       // set the element's new position:
       let elementHeight = elementToDrag.current.offsetHeight;
-      let elementWidth = elementToDrag.current.offsetHeight;
+      let elementWidth = elementToDrag.current.offsetWidth;
       let elementTopOffset = elementToDrag.current.offsetTop;
       let elementLeftOffset = elementToDrag.current.offsetLeft;
       let topVal = elementTopOffset - pos2;
       let leftVal = elementLeftOffset - pos1;
 
       // Condition For Keeping Explorer in Window
-      if (topVal <= 34) topVal = 34;
-      if (leftVal <= 60) leftVal = 60;
+      if (topVal < 34) topVal = 34;
+      if (leftVal < 60) leftVal = 60;
 
       let windowHeight = window.innerHeight;
       let windowWidth = window.innerWidth;
@@ -103,8 +103,8 @@ const Explorer = ({
       style={{
         top: activity.isMaximise ? "34px" : activity.top,
         left: activity.isMaximise ? "60px" : activity.left,
-        height: activity.isMaximise ? "calc(100vh - 35px)" : height,
-        width: activity.isMaximise ? "calc(100vw - 62px)" : width,
+        height: activity.isMaximise ? "calc(100vh - 35px)" : activity.height,
+        width: activity.isMaximise ? "calc(100vw - 62px)" : activity.width,
         zIndex: activity.zIndex,
       }}
       ref={elementToDrag}
@@ -116,7 +116,19 @@ const Explorer = ({
           onDoubleClick={toggleMaximise}
           ref={explorerRef}
         >
-          {activity.header}
+          <div className="explorer-heading-name-icon-container">
+            <div className="centralise">
+              <img
+                src={activity && activity.image ? activity.image : fileImage}
+                height="15px"
+                width="15px"
+                alt="explorer heading"
+              />
+            </div>
+            <div className="centralise">
+              <span>{activity && activity.name}</span>
+            </div>
+          </div>
         </div>
         <div className="explorer-header-btn-container">
           <div className="explorer-close-btn">-</div>
@@ -141,8 +153,10 @@ const Explorer = ({
           </div>
         </div>
       </div>
-      <div className="explorer-body">Body</div>
-      <div className="explorer-footer">Footer</div>
+      <div className="explorer-body">{activity && activity.child}</div>
+      {activity && activity.footer ? (
+        <div className="explorer-footer">{activity.footer}</div>
+      ) : null}
     </div>
   );
 };
@@ -156,4 +170,5 @@ export default connect(mapStateToProps, {
   removeActivity,
   toggleActivityMaximise,
   updatePositionActivity,
+  updateDimensionActivity,
 })(Explorer);

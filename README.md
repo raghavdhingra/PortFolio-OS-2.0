@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Bring Windows to web, no kidding . Just clone this project and you will get portfolio for Web.
+
 ## Available Scripts
 
 In the project directory, you can run:
